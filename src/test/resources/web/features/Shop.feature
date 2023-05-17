@@ -1,24 +1,16 @@
-#Feature: Shop
-#
-#  @Smoke
-#  Scenario: Definir
-#    Given The client is in google page
-#    When The client tap on Shop menu
-#    Then The client see Filter By Price
-
-  @Smoke @shop
+  @Smoke @Shop
   Feature: Shop
 
   Background:
     Given el usuario esta en la pagina Automation Testing
-    And hace click en el menu "Shop"
+    And hace click en el menu Shop
 
 #1. Shop Filter by Price funcionality
 
-  @filterPrice
+  @FilterPrice
   Scenario Outline: Filtrar productos entre dos precios exitoso
     When filtra el precio entre inicio <inicio> y fin <fin>
-    And hace click en el boton "FILTER"
+    And hace click en el boton FILTER
     Then visualiza los productos que tienen precios entre inicio <inicio> y fin <fin>
 
     Examples:
@@ -27,7 +19,7 @@
 
 #2. Shop Product Categories funcionality
 
-  @categories
+  @Categories
   Scenario Outline: Filtrar productos por categoria <categoria> exitoso
     When hace click en la categoria <categoria>
     Then visualiza los productos de la categoria <categoria>

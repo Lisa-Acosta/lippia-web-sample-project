@@ -11,6 +11,9 @@ public class MyAccountService extends ActionManager {
     private static final String INPUT_TEXT_PASSWORD_REGISTER = "xpath://*[@id='reg_password']";
     private static final String TEXT_LOGOUT = "xpath://a[text()='Logout']";
     private static final String TEXT_SALUDO = "xpath://*[contains(text(),'Hello')]";
+    private static final String TEXT_ERROR = "xpath: //*[@id='page-36']/div/div[1]/ul/li";
+
+    //private static final String TEXT_ERROR = "xpath: //*[contains(text(),'Error')]";
 
     public static void ingresarUsuario(String usuario){
         ActionManager.waitClickable(INPUT_TEXT_USERNAME_LOGIN).sendKeys(usuario);
@@ -26,10 +29,16 @@ public class MyAccountService extends ActionManager {
     }
 
     public static void verificaMyAccount() {
+
         Assert.assertTrue(ActionManager.waitPresence(TEXT_LOGOUT).isDisplayed());
     }
 
     public static void visualizaSaludo(String saludo) {
         Assert.assertTrue(TEXT_SALUDO.contains(saludo));
     }
+    public static void visualizaError(String error) {
+
+        Assert.assertTrue(TEXT_ERROR.contains(error));
+    }
+
 }
