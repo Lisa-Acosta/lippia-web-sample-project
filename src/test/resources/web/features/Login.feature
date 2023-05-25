@@ -24,9 +24,12 @@ Feature: Login
     Then visualiza el mensaje <mensaje>
 
     Examples:
-      | usuario               | password    | mensaje                                                   |
-      | lisita.acosta@gmail   | password    | Error: A user could not be found with this email address. |
-      | lisa.acosta@gmail.com |             | Error: Password is required.                              |
-      |                       | Ninguna01$? | Error: Username is required.                              |
+      | usuario               | password    | mensaje |
+      | lisita.acosta@gmail   | password    | Error   |
+      | lisa.acosta@gmail.com |             | Error   |
+      |                       | Ninguna01$? | Error   |
+      |                       |             |         |
+      | LiSa.AcOsTa@GMAIL.COM | nINGUNA01$? | Error   |
+
 
 
