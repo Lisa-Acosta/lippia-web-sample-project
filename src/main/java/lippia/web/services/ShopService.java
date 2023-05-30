@@ -2,31 +2,21 @@ package lippia.web.services;
 
 import com.crowdar.core.actions.ActionManager;
 import com.crowdar.core.actions.WebActionManager;
-import com.sun.source.tree.AssertTree;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-public class ShopService extends ActionManager{
 
+import java.util.HashMap;
+import java.util.Map;
 
-    private static final String FILTER_BY_PRICE_LABEL = "xpath://*[@id='woocommerce_price_filter-2']/h4";
-    private static final String FILTER_PRICE_INICIO = "xpath: //*[@id='woocommerce_price_filter-2']/form/div/div[2]/div[1]/span[1]";
-    private static final String FILTER_PRICE_FIN = "xpath: //*[@id='woocommerce_price_filter-2']/form/div/div[1]/span[2]";
-    private static final String FILTER_PRICE_BUTTON = "xpath: //*[@id='woocommerce_price_filter-2']/form/div/div[2]/button";
+import static lippia.web.constants.ShopConstants.*;
 
-    public static final String CATEGORIA_ANDROID = "xpath: //*[@id='woocommerce_product_categories-2']/ul/li[1]/a";
-    public static final String CATEGORIA_HTML = "xpath: //*[@id='woocommerce_product_categories-2']/ul/li[2]/a";
-    public static final String CATEGORIA_JAVASCRIPT = "xpath: //*[@id='woocommerce_product_categories-2']/ul/li[3]/a";
-    public static final String CATEGORIA_SELENIUM = "xpath: //*[@id='woocommerce_product_categories-2']/ul/li[4]/a";
-    public static final String CATEGORIA_PRODUCTO = "xpath: //*[@id='content']/nav";
-
-    private static final String FILTER_RESULT = "xpath: //*[@id='content']/ul/li[1]/a[1]/span/span/text()";
-    private static WebDriver driver;
+public class ShopService extends ActionManager {
 
     public static void verifyPage() {
-        Assert.assertTrue( ActionManager.waitPresence( FILTER_BY_PRICE_LABEL ).isDisplayed() );
+        Assert.assertTrue(ActionManager.waitPresence(FILTER_BY_PRICE_LABEL).isDisplayed());
     }
 
-    public static void filtrarPrecio(String inicio, String fin){
+    public static void filtrarPrecio(String inicio, String fin) {
 //        WebElement inputInicio = driver.findElement(By.id(FILTER_PRICE_INICIO));
 //          inputInicio.sendKeys(inicio);
 //        WebElement inputFin = driver.findElement(By.id(FILTER_PRICE_INICIO));
@@ -34,7 +24,9 @@ public class ShopService extends ActionManager{
         ActionManager.waitClickable(FILTER_PRICE_INICIO).sendKeys(inicio);
         ActionManager.waitClickable(FILTER_PRICE_FIN).sendKeys(fin);
     }
-    public static void botonFilter( ) {
+
+    public static void botonFilter() {
+
         WebActionManager.click(FILTER_PRICE_BUTTON);
     }
 
@@ -52,30 +44,117 @@ public class ShopService extends ActionManager{
             case "selenium":
                 WebActionManager.waitClickable(CATEGORIA_SELENIUM).click();
                 break;
-    }}
+            default:
+                throw new RuntimeException("Categoría no definida");
+        }
+    }
 
-//    public static void filtrarPrecio(String inicio, String fin) {
+    //    public static void filtrarPrecio(String inicio, String fin) {
 //        String filtro;
 //        if((FILTER_PRICE_INICIO.contains(inicio)) & (FILTER_PRICE_FIN.contains(fin))){
 //            boolean productosVisualiza = ActionManager.isVisible(FILTER_PRICE_INICIO,FILTER_PRICE_FIN);
 //            Assert.assertTrue(productosVisualiza);
 //        }
 //    }
-        public static void visualizaCategoria(String categoria) {
-            switch (categoria) {
-                case "Android":
-                    Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_ANDROID).isDisplayed());
-                    break;
-                case "HTML":
-                    Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_HTML).isDisplayed());
-                    break;
-                case "Javascript":
-                    Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_JAVASCRIPT).isDisplayed());                    break;
-                case "selenium":
-                    Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_SELENIUM).isDisplayed());                    break;
-            }
+    public static void visualizaCategoria(String categoria) {
+        switch (categoria) {
+            case "Android":
+                Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_ANDROID).isDisplayed());
+                break;
+            case "HTML":
+                Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_HTML).isDisplayed());
+                break;
+            case "Javascript":
+                Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_JAVASCRIPT).isDisplayed());
+                break;
+            case "selenium":
+                Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_SELENIUM).isDisplayed());
+                break;
+            default:
+                throw new RuntimeException("Categoría no definida");
         }
+    }
 
+    public static void haceClickEnDefault() {
+
+        WebActionManager.waitClickable(SORT_DEFAULT).click();
+    }
+
+    public static void haceClickEnOrdenamiento(String item) {
+        switch (item) {
+            case "Default sorting":
+                WebActionManager.waitClickable(DEFAULT_SORT).click();
+                break;
+            case "Sort by popularity":
+                WebActionManager.waitClickable(POPULARITY_SORT).click();
+                break;
+            case "Sort by average rating":
+                WebActionManager.waitClickable(RATING_SORT).click();
+                break;
+            case "Sort by newness":
+                WebActionManager.waitClickable(NEWNESS_SORT).click();
+                break;
+            case "Sort by price: low to high":
+                WebActionManager.waitClickable(PRICE_SORT).click();
+                break;
+            case "Sort by price: high to low":
+                WebActionManager.waitClickable(PRICE_DESC_SORT).click();
+                break;
+            default:
+                throw new RuntimeException("Ordenamiento no definido");
+        }
+    }
+
+    public static void visualizaOrdenamiento(String item) {
+        switch (item) {
+            case "Default sorting":
+                Assert.assertTrue(ActionManager.isSelected(DEFAULT_SORT));
+                break;
+            case "Sort by popularity":
+                Assert.assertTrue(ActionManager.waitPresence(POPULARITY_SORT).isSelected());
+                break;
+            case "Sort by average rating":
+                Assert.assertTrue(ActionManager.waitPresence(RATING_SORT).isSelected());
+                break;
+            case "Sort by newness":
+                Assert.assertTrue(ActionManager.waitPresence(NEWNESS_SORT).isSelected());
+                break;
+            case "Sort by price: low to high":
+                Assert.assertTrue(ActionManager.waitPresence(PRICE_SORT).isSelected());
+                break;
+            case "Sort by price: high to low":
+                Assert.assertTrue(ActionManager.waitPresence(PRICE_DESC_SORT).isSelected());
+                break;
+            default:
+                throw new RuntimeException("Ordenamiento no definido");
+        }
+    }
+
+    public static void clickAgotado(String agotado) {
+        Map <String, String> buttons = new HashMap<>();
+        buttons.put("Android Quick Start Guide", READ_MORE_ANDROID);
+        buttons.put("HTML5 Forms", READ_MORE_HTML);
+        buttons.put("Thinking in HTML", READ_MORE_THINKING_HTML);
+        String xpathAgotado = buttons.get(agotado);
+        WebActionManager.waitClickable(xpathAgotado).click();
+    }
+
+    public static void visulizaPaginaProducto(String producto) {
+        String titulo = TITULO_PAGINA_PRODUCTO.replace("%s",producto);
+        Assert.assertTrue(ActionManager.isVisible(titulo));
+    }
+
+    public static void visualizaMensajeAgotado(String mensajeAgotado) {
+        Assert.assertTrue(ActionManager.waitPresence(MENSAJE_AGOTADO).isDisplayed());
+        //Aca como comparo con el mensaje agotado
+
+    }
+
+    public static void noVisualizarAddToBasquet() {
+        Assert.assertFalse(WebActionManager.isPresent(BOTON_ADD_TO_BASQUET));
+    }
 }
+
+
 
 
