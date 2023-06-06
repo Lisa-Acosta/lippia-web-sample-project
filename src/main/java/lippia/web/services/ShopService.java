@@ -2,7 +2,6 @@ package lippia.web.services;
 
 import com.crowdar.core.actions.ActionManager;
 import com.crowdar.core.actions.WebActionManager;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.HashMap;
@@ -11,24 +10,6 @@ import java.util.Map;
 import static lippia.web.constants.ShopConstants.*;
 
 public class ShopService extends ActionManager {
-
-    public static void verifyPage() {
-        Assert.assertTrue(ActionManager.waitPresence(FILTER_BY_PRICE_LABEL).isDisplayed());
-    }
-
-    public static void filtrarPrecio(String inicio, String fin) {
-//        WebElement inputInicio = driver.findElement(By.id(FILTER_PRICE_INICIO));
-//          inputInicio.sendKeys(inicio);
-//        WebElement inputFin = driver.findElement(By.id(FILTER_PRICE_INICIO));
-//        inputFin.sendKeys(fin);
-        ActionManager.waitClickable(FILTER_PRICE_INICIO).sendKeys(inicio);
-        ActionManager.waitClickable(FILTER_PRICE_FIN).sendKeys(fin);
-    }
-
-    public static void botonFilter() {
-
-        WebActionManager.click(FILTER_PRICE_BUTTON);
-    }
 
     public static void clickCategoria(String categoria) {
         switch (categoria) {
@@ -49,13 +30,7 @@ public class ShopService extends ActionManager {
         }
     }
 
-    //    public static void filtrarPrecio(String inicio, String fin) {
-//        String filtro;
-//        if((FILTER_PRICE_INICIO.contains(inicio)) & (FILTER_PRICE_FIN.contains(fin))){
-//            boolean productosVisualiza = ActionManager.isVisible(FILTER_PRICE_INICIO,FILTER_PRICE_FIN);
-//            Assert.assertTrue(productosVisualiza);
-//        }
-//    }
+
     public static void visualizaCategoria(String categoria) {
         switch (categoria) {
             case "Android":
@@ -73,11 +48,6 @@ public class ShopService extends ActionManager {
             default:
                 throw new RuntimeException("Categoría no definida");
         }
-    }
-
-    public static void haceClickEnDefault() {
-
-        WebActionManager.waitClickable(SORT_DEFAULT).click();
     }
 
     public static void haceClickEnOrdenamiento(String item) {
@@ -131,7 +101,7 @@ public class ShopService extends ActionManager {
     }
 
     public static void clickAgotado(String agotado) {
-        Map <String, String> buttons = new HashMap<>();
+        Map<String, String> buttons = new HashMap<>();
         buttons.put("Android Quick Start Guide", READ_MORE_ANDROID);
         buttons.put("HTML5 Forms", READ_MORE_HTML);
         buttons.put("Thinking in HTML", READ_MORE_THINKING_HTML);
@@ -140,14 +110,11 @@ public class ShopService extends ActionManager {
     }
 
     public static void visulizaPaginaProducto(String producto) {
-        String titulo = TITULO_PAGINA_PRODUCTO.replace("%s",producto);
-        Assert.assertTrue(ActionManager.isVisible(titulo));
+        Assert.assertTrue(ActionManager.isVisible(TITULO_PAGINA_PRODUCTO, producto));
     }
 
     public static void visualizaMensajeAgotado(String mensajeAgotado) {
-        Assert.assertTrue(ActionManager.waitPresence(MENSAJE_AGOTADO).isDisplayed());
-        //Aca como comparo con el mensaje agotado
-
+        Assert.assertTrue(ActionManager.waitPresence(BUSCAR_POR_TEXTO, mensajeAgotado).isDisplayed());
     }
 
     public static void noVisualizarAddToBasquet() {

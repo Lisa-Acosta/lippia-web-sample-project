@@ -1,24 +1,25 @@
-@homepage
+@Homepage @Smoke
 Feature: Home Page
 
   Background:
-    Given el usuario esta en la pagina"http://practice.automationtesting.in/"
-    And hace click en el menu "Shop"
-    And hace click en el menu "Home"
+    Given el usuario esta en la pagina Automation Testing
 
 
-#1. Home Page with three sliders only
-#2. Home page with three arrivals only
+  Scenario Outline: Visualizar <informacion> de un producto exitoso
+    Then verifica los 'new arrivals' con solo tres productos
+    When hace click en la imagen del producto <producto> de 'NEW ARRIVALS'
+    And hace click en la pestaña de informacion <informacion> del producto
+    Then visualiza la informacion <informacion> del producto con la <descripcion>
 
-  @sliders @arrivals
-  Scenario Outline: Validar  Home Page con solo tres <tipoElemento> exitoso
-	# When hace click en el menu "Shop"
-	# And hace click en el menu "Home"
-	#Then se redirige a la home page
-    When hace click en los elementos <tipoElemento>
-    Then visualiza los tipo de elemento <tipoElemento> con tres elementos
-
+    @Description
     Examples:
-      |tipoElemento|
-      |Sliders	 |
-      |Arrivals	 |
+      | informacion | producto         | descripcion                                                    |
+      | DESCRIPTION | Thinking in Html | This book provides you with an intermediate knowledge of HTML. |
+
+    @Reviews
+    Examples:
+      | informacion | producto             | descripcion                                   |
+      | REVIEWS     | Selenium Ruby        | Be the first to review “Selenium Ruby”        |
+      | REVIEWS     | Thinking in Html     | Be the first to review “Thinking in HTML”     |
+      | REVIEWS     | Mastering Javascript | Be the first to review “Mastering JavaScript” |
+

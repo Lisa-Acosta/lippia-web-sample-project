@@ -1,9 +1,7 @@
 package lippia.web.services;
-
 import com.crowdar.core.actions.ActionManager;
 import com.crowdar.core.actions.WebActionManager;
 import org.testng.Assert;
-
 import static lippia.web.constants.MyAccountConstants.*;
 
 public class MyAccountServices extends ActionManager {
@@ -22,12 +20,9 @@ public class MyAccountServices extends ActionManager {
     public static void visualizaMensaje(String mensaje) {
         String usuario = TEXT_USUARIO.replace("%s",mensaje);
         Assert.assertTrue(ActionManager.isVisible(usuario));
-//        String usuarioReal = WebActionManager.getText(usuario);
-//        Assert.assertEquals(mensaje, usuarioReal);
     }
 
     public static void clicAccountDetails() {
-
         WebActionManager.waitClickable(LINK_ACCOUNT_DETAILS).click();
     }
 
