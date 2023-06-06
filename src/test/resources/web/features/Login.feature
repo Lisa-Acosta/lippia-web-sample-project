@@ -16,7 +16,7 @@ Feature: Login
       | usuario               | password    | saludo |
       | lisa.acosta@gmail.com | Ninguna01$? | Hello  |
 
-@LoginFallido
+  @LoginFallido
   Scenario Outline: Login fallido
     When ingresa el usuario <usuario>
     And ingresa la password <password>
@@ -30,6 +30,23 @@ Feature: Login
       |                       | Ninguna01$? | Error   |
       |                       |             |         |
       | LiSa.AcOsTa@GMAIL.COM | nINGUNA01$? | Error   |
+
+  @LoginSignOut
+  Scenario Outline: Deslogueo exitoso
+    When ingresa el usuario <usuario>
+    And ingresa la password <password>
+    And hace click en el boton LOGIN
+    Then se redirige a la pagina de su cuenta
+    And visualiza el saludo <saludo>
+    When hace click en el boton Sign Out
+    Then visualiza la pagina del Login
+    When hace click en el boton Atras
+    Then visualiza la pagina del Login
+    And no visualiza su cuenta
+
+    Examples:
+      | usuario               | password    | saludo |
+      | lisa.acosta@gmail.com | Ninguna01$? | Hello  |
 
 
 

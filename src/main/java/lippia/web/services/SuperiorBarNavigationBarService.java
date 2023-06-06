@@ -3,7 +3,6 @@ package lippia.web.services;
 import com.crowdar.core.PropertyManager;
 import com.crowdar.core.actions.ActionManager;
 import com.crowdar.core.actions.WebActionManager;
-import org.checkerframework.checker.units.qual.C;
 
 import static com.crowdar.core.actions.WebActionManager.navigateTo;
 import static lippia.web.constants.SuperiorNavigationBarConstants.*;
@@ -23,5 +22,12 @@ public class SuperiorBarNavigationBarService extends ActionManager {
 
     public static void carMenu() {
         WebActionManager.click(CAR_MENU_BUTTON);
+    }
+
+    public static void clickEnHome() {
+        WebActionManager.getWait();
+        WebActionManager.waitPresence(HOME_MENU_BUTTON);
+        WebActionManager.waitVisibility(HOME_MENU_BUTTON).click();
+        click(HOME_MENU_BUTTON);
     }
 }
