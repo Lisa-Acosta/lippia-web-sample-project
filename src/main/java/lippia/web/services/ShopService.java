@@ -5,6 +5,7 @@ import com.crowdar.core.actions.WebActionManager;
 import org.testng.Assert;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static lippia.web.constants.ShopConstants.*;
@@ -30,24 +31,9 @@ public class ShopService extends ActionManager {
         }
     }
 
-
     public static void visualizaCategoria(String categoria) {
-        switch (categoria) {
-            case "Android":
-                Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_ANDROID).isDisplayed());
-                break;
-            case "HTML":
-                Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_HTML).isDisplayed());
-                break;
-            case "Javascript":
-                Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_JAVASCRIPT).isDisplayed());
-                break;
-            case "selenium":
-                Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_SELENIUM).isDisplayed());
-                break;
-            default:
-                throw new RuntimeException("Categoría no definida");
-        }
+        Assert.assertTrue(ActionManager.waitPresence(CATEGORIA_PRODUCTO).isDisplayed());
+        Assert.assertTrue(WebActionManager.getText(CATEGORIA_PRODUCTO).contains(categoria));
     }
 
     public static void haceClickEnOrdenamiento(String item) {
