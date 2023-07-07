@@ -22,10 +22,6 @@ public class HomeSteps extends PageSteps {
         SuperiorBarNavigationBarService.clickEnHome();
     }
 
-    @Then("verifica los 'new arrivals' con solo tres productos")
-    public void verificaLosArribosConSoloTresProductos() {
-        HomeServices.verificarCantidadDeProductos();
-    }
 
     @When("hace click en la imagen del producto (.*) de 'NEW ARRIVALS'")
     public void haceClickEnLaImagenDelProductoDe(String libro) {
@@ -37,8 +33,13 @@ public class HomeSteps extends PageSteps {
         HomeServices.clickInformacion(informacion);
     }
 
-    @Then("visualiza la informacion (.*) del producto con la (.*)")
+    @Then("visualiza la informacion (.*) del producto con (.*)")
     public void visualizaLaInformacionDelProductoConLaDescripcion(String informacion, String descripcion) {
         HomeServices.visualizaInformacion(informacion,descripcion);
+    }
+
+    @Then("verifica los elementos (.*) con tres elementos")
+    public void verificaLosElementosConTresElementos(String tipoELemento) {
+        HomeServices.verificarCantidadElementos(tipoELemento);
     }
 }
