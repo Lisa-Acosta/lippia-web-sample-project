@@ -5,7 +5,6 @@ import io.cucumber.java.en.*;
 import lippia.web.services.LoginServices;
 
 public class LoginSteps extends PageSteps {
-
     @When("ingresa el usuario (.*)")
     public void ingresaElUsuario(String usuario) {
 
@@ -31,6 +30,7 @@ public class LoginSteps extends PageSteps {
     public void visualizaElSaludo(String saludo) {
         LoginServices.visualizaSaludo(saludo);
     }
+
     @Then("visualiza el mensaje (.*)")
     public void visualizaElMensaje(String error) {
         LoginServices.visualizaError(error);
@@ -54,5 +54,10 @@ public class LoginSteps extends PageSteps {
     @And("no visualiza su cuenta")
     public void noVisualizaSuCuenta() {
         LoginServices.noVisualizaCuenta();
+    }
+
+    @Then("se visualiza la password enmascarada")
+    public void seVisualizaLaPasswordEnmascarada() {
+        LoginServices.visualizarContraseniaEnmascarada();
     }
 }

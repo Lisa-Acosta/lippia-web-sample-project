@@ -9,15 +9,15 @@ import static lippia.web.constants.MyAccountConstants.*;
 
 public class LoginServices extends ActionManager {
     public static void ingresarUsuario(String usuario) {
-        ActionManager.waitClickable(INPUT_TEXT_USERNAME_LOGIN).sendKeys(usuario);
+        ActionManager.waitClickable(INPUT_USERNAME_LOGIN).sendKeys(usuario);
     }
 
     public static void ingresarPassword(String password) {
-        ActionManager.waitClickable(INPUT_TEXT_PASSWORD_LOGIN).sendKeys(password);
+        ActionManager.waitClickable(INPUT_PASSWORD_LOGIN).sendKeys(password);
     }
 
     public static void clickLogin() {
-        click(LOGIN_BUTTON);
+        ActionManager.click(LOGIN_BUTTON);
     }
 
     public static void verificaMyAccount() {
@@ -47,5 +47,9 @@ public class LoginServices extends ActionManager {
 
     public static void noVisualizaCuenta() {
         Assert.assertFalse(ActionManager.isPresent(TEXT_SALUDO));
+    }
+
+    public static void visualizarContraseniaEnmascarada() {
+        Assert.assertEquals(ActionManager.getAttribute(INPUT_PASSWORD_LOGIN, "type"), "password");
     }
 }
