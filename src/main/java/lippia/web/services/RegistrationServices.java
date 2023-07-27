@@ -1,7 +1,6 @@
 package lippia.web.services;
 
 import com.crowdar.core.actions.ActionManager;
-import com.crowdar.core.actions.WebActionManager;
 import org.testng.Assert;
 
 import static lippia.web.constants.MyAccountConstants.*;
@@ -10,21 +9,21 @@ import static lippia.web.constants.MyAccountConstants.*;
 public class RegistrationServices extends ActionManager {
 
     public static void ingresarUsuario(String usuario) {
-        WebActionManager.waitClickable(INPUT_TEXT_EMAIL_REGISTER).sendKeys(usuario);
+        ActionManager.waitClickable(INPUT_EMAIL_REGISTER).sendKeys(usuario);
     }
 
     public static void ingresarPassword(String password) {
-        WebActionManager.waitClickable(INPUT_TEXT_PASSWORD_REGISTER).sendKeys(password);
+        ActionManager.waitClickable(INPUT_PASSWORD_REGISTER).sendKeys(password);
     }
 
     public static void clickRegister() {
-        WebActionManager.waitClickable(REGISTER_BUTTON).click();
+        ActionManager.waitClickable(REGISTER_BUTTON).click();
     }
 
     public static void mensajeError(String mensaje) {
-        String error = MENSAJE_ERROR.replace("%s", mensaje);
+        String error = String.format(SEARCH_FOR_TEXT, mensaje);
         Assert.assertTrue(ActionManager.isVisible(error));
-        String mensajeReal = WebActionManager.getText(error);
+        String mensajeReal = ActionManager.getText(error);
         Assert.assertTrue(mensajeReal.contains(mensaje));
     }
 }
